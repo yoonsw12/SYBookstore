@@ -8,12 +8,16 @@ var myApp = angular.module('myApp');
 // routeParams get data from form etc.
 // this will only work with non minified angular.
 
-// Change in snytax here to make it work for angular minified2.
+// Change in snytax here to make it work for angular minified.
 myApp.controller('BooksController', ['$scope', '$http', '$location', '$routeParams', function($scope, $http, $location, $routeParams){
+	console.log("Books loading");
 
 	$scope.getBooks = function(){
-		$http.get('/api/books').success(function(response){
-			$scope.books = response;
-		});
+		$http.get('/api/books').then(function (response){
+			console.log(response.data);
+			$scope.books = response.data;
+	    },function (error){
+
+	    });
 	}
 }]);
