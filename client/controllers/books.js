@@ -20,4 +20,23 @@ myApp.controller('BooksController', ['$scope', '$http', '$location', '$routePara
 
 	    });
 	}
+
+	$scope.getBook = function(){
+		var id = $routeParams.id
+		$http.get('/api/books/'+id).then(function (response){
+			$scope.book = response.data;
+	    },function (error){
+
+	    });
+	}
+
+	$scope.addBook = function(){
+		console.log($scope.book);
+
+		$http.post('/api/books/', $scope.book).then(function (response){
+			window.location.href='#!/books';
+	    },function (error){
+
+	    });
+	}
 }]);
